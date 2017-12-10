@@ -5,8 +5,8 @@
 * Define associations
 * Discuss one:one, one:many, many:many
 
-// There are two ways for this
-##Embedding data
+##There are two ways for this
 
-## Referencing data
+* Embedding data
+* Referencing data
 

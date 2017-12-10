@@ -6,7 +6,7 @@ var postSchema = new mongoose.Schema({
     content: String
 });
 
-var Post = mongoose.model("Post",postSchema);
+var Post = mongoose.model("Post", postSchema);
 
 var userSchema = new mongoose.Schema({
     email: String,
@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
     posts: [postSchema]
 });
 
-var User=mongoose.model("User",userSchema);
+var User = mongoose.model("User", userSchema);
 
 // var newUser= new User({
 //     email: 'hermoine@gmail.com',
@@ -42,10 +42,21 @@ var User=mongoose.model("User",userSchema);
 //     }
 // });
 
-User.findOne({name: 'Hermoine Granger'},function (err,user) {
-    if(err){
+User.findOne({name: 'Hermoine Granger'}, function (err, user) {
+    if (err) {
         console.log(err);
     } else {
         console.log(user);
+        user.posts.push({
+            title: 'Where than bright light comes from?',
+            content: 'Expecto Patronum!!'
+        });
+        user.save(function (err, user) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(user);
+            }
+        });
     }
 });
