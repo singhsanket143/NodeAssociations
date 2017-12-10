@@ -26,27 +26,34 @@ var User = mongoose.model("User", userSchema);
 //     name: 'Bob'
 // });
 
-Post.create({
-    title: 'Exams 3',
-    content: 'Examover!!'
-},function (err,post) {
+// Post.create({
+//     title: 'Exams 3',
+//     content: 'Examover!!'
+// },function (err,post) {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         //console.log(post);
+//         User.findOne({email:'bob@gmail.com'},function (err,foundUser) {
+//             if(err){
+//                 console.log(err);
+//             } else{
+//                 foundUser.posts.push(post);
+//                 foundUser.save(function (err,data) {
+//                     if(err){
+//                         console.log(err);
+//                     } else {
+//                         console.log(foundUser);
+//                     }
+//                 });
+//             }
+//         });
+//     }
+// });
+User.findOne({email: 'bob@gmail.com'}).populate("posts").exec(function (err,user) {
     if(err){
         console.log(err);
     } else {
-        //console.log(post);
-        User.findOne({email:'bob@gmail.com'},function (err,foundUser) {
-            if(err){
-                console.log(err);
-            } else{
-                foundUser.posts.push(post);
-                foundUser.save(function (err,data) {
-                    if(err){
-                        console.log(err);
-                    } else {
-                        console.log(foundUser);
-                    }
-                });
-            }
-        });
+        console.log(user);
     }
-});
+})
