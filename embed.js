@@ -1,13 +1,6 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/blog_demo");
 
-var userSchema = new mongoose.Schema({
-    email: String,
-    name: String
-});
-
-var User=mongoose.model("User",userSchema);
-
 var postSchema = new mongoose.Schema({
     title: String,
     content: String
@@ -15,9 +8,23 @@ var postSchema = new mongoose.Schema({
 
 var Post = mongoose.model("Post",postSchema);
 
+var userSchema = new mongoose.Schema({
+    email: String,
+    name: String,
+    posts: [postSchema]
+});
+
+var User=mongoose.model("User",userSchema);
+
 // var newUser= new User({
-//     email: 'singhsanket143@gmail.com',
-//     name: 'Sanket'
+//     email: 'hermoine@gmail.com',
+//     name: 'Hermoine Granger'
+// });
+//
+//
+// newUser.posts.push({
+//     title: 'The 3rd unforgivable curse?',
+//     content: 'Avada kedavara'
 // });
 // newUser.save(function (err,user) {
 //     if(err){
@@ -27,15 +34,18 @@ var Post = mongoose.model("Post",postSchema);
 //     }
 // });
 
-var newPost = new Post({
-    title: 'Reflections on apple',
-    content: 'They are super delicious'
-});
+// newPost.save(function (err,Post) {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(Post);
+//     }
+// });
 
-newPost.save(function (err,Post) {
+User.findOne({name: 'Hermoine Granger'},function (err,user) {
     if(err){
         console.log(err);
     } else {
-        console.log(Post);
+        console.log(user);
     }
 });
